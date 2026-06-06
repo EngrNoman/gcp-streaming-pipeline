@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  producer:
+    build:
+      context: ./producer
+      dockerfile: Dockerfile
+    container_name: clickstream_producer_container
+    volumes:
+      # Local credentials folder ko container ke andar mount kar raha hai
+      - ./credentials:/app/credentials:ro
+    environment:
+      - GCP_PROJECT_ID=clickstream-analytics-prod # <--- Apna actual GCP Project ID yahan likhein
+      - PUBSUB_TOPIC_ID=clickstream-raw
+      # Container ko batana ke key kahan pari hai Khud apne system ka path nahi dena, container ke andar ka dena hai
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/gcp-key.json
+    restart: unless-stopped

@@ -1,0 +1,14 @@
+# GCP Security Credentials
+credentials/*.json
+*.json
+
+# Terraform state and cache files
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Python cache files
+__pycache__/
+*.pyc
+.venv/
